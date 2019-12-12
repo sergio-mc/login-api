@@ -17,9 +17,19 @@ class AuthLogin
      */
     public function handle($request, Closure $next)
     {
+
         $key = env('JWT_KEY');
         $decoded = JWT::decode($request->getContent(), $key, array('HS256'));
-        $request->attributes->add(['decoded' => json_encode($decoded)]);
-        return $next($request);
+        $email = $decoded->email;
+        $password = $decoded->password;
+        $response = 'Error';
+        
+        if(!empty($email) && !empty($password))
+        {
+            $request->attributes->add(['decoded' => json_encode($decoded)]);
+            return $next($request);
+        }else{return $response;}
+        
+        
     }
 }

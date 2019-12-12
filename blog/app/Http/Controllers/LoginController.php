@@ -4,14 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Firebase\JWT\JWT;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        //$key = "zanahoria";
-        //$decoded = JWT::decode($request->getContent(), $key, array('HS256'));
-        //return json_encode($decoded);
+        $decoded = json_decode($request->get('decoded'));
+        $email = $decoded->email;
+        $password = $decoded->password;
+
+        $logEmail = Log::notice('Email: '.$email);
+        $logPassword = Log::notice('Password: '.$password);
+
         return $request->get('decoded');
     }
 }
