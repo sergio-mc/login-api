@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \Firebase\JWT\JWT;
 use Illuminate\Support\Facades\Log;
 
+
 class LoginController extends Controller
 {
     public function login(Request $request)
